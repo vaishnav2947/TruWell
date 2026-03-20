@@ -7,14 +7,20 @@ const path = require('path');
 dotenv.config();
 
 const app = express();
+app.options('*', cors());
 
 // Middleware
-app.use(cors({
-  origin: function(origin, callback) {
-    callback(null, true);
-  },
-  credentials: true
-}));
+app.use(cors({ origin: '*', credentials: false }));
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
