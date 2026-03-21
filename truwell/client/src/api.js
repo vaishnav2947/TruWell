@@ -1,8 +1,12 @@
 import axios from 'axios';
 
+const defaultBaseURL =
+  typeof window !== 'undefined' ? '/api' : 'http://localhost:5000/api';
+
 const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000/api',
-  withCredentials: true,
+  baseURL: process.env.REACT_APP_API_URL || defaultBaseURL,
+  // JWT is sent via Authorization header, so cookie credentials are not required.
+  withCredentials: false,
 });
 
 API.interceptors.request.use((config) => {
