@@ -1,13 +1,15 @@
 {
   "name": "truwell-pharmacy",
   "version": "1.0.0",
-"scripts": {
-  "start": "node server/index.js",
-  "dev": "concurrently \"npm run server\" \"npm run client\"",
-  "server": "nodemon server/index.js",
-  "client": "cd client && npm start",
-  "install-all": "npm install && cd client && npm install"
-},
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon server/index.js",
+    "client": "cd client && npm start",
+    "install-all": "npm install && cd client && npm install",
+    "create-admin": "node server/scripts/createAdmin.js",
+    "make-admin": "node server/scripts/createAdmin.js promote",
+    "make-pharmacist": "node server/scripts/createAdmin.js pharmacist"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
